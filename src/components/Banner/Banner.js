@@ -1,24 +1,24 @@
 import React from "react";
 
-function Banner({ children }) {
-  return <div className="banner">{children}</div>;
+function Banner({ type, children }) {
+  return <div className={`banner ${type}`}>{children}</div>;
 }
 
 function HappyBanner({ numGuesses }) {
   return (
-    <div className="happy banner">
+    <Banner type="happy">
       <p>
         <strong>Congratulations!</strong> Got it in <strong>{numGuesses} guesses</strong>.
       </p>
-    </div>
+    </Banner>
   )
 }
 
 function SadBanner({ answer }) {
   return (
-    <div className="sad banner">
+    <Banner type={"sad"}>
       <p>Sorry, the correct answer is <strong>{answer}</strong>.</p>
-    </div>
+    </Banner>
   )
 }
 
