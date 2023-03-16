@@ -2,13 +2,18 @@ import React from "react";
 import { range } from "../../utils"
 import Guess from "../Guess/Guess";
 
-function Board({ guessHistory, numMaxGuesses }) {
-  let last6Guesses = [...guessHistory, ...range(numMaxGuesses - guessHistory.length).map(item => "")]
-  
-  console.log(last6Guesses)
+function Board({ guessHistory, numMaxGuesses, wordLength }) {
+  const emptyGuess = (item) => {
+    return range(wordLength).map(character => {
+      return { letter: "", status: "" }
+    })
+  }
+  let guessesIncludingBlanks = [...guessHistory, ...range(numMaxGuesses - guessHistory.length).map(item => emptyGuess())]
+
+  console.log(guessesIncludingBlanks)
   return (
     <div className="guess-results">
-      {last6Guesses.map((guess,i) => <Guess key={i} guessedWord={guess}></Guess>)}
+      {guessesIncludingBlanks.map((guess, i) => <Guess key={i} guessedWord={guess}></Guess>)}
     </div>)
 }
 
