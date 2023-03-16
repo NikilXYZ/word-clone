@@ -1,6 +1,6 @@
 import React from "react";
 
-function GuessInput({ sendGuess }) {
+function GuessInput({ sendGuess, disabled, wordLength }) {
   const [guess, setGuess] = React.useState("")
 
   return (
@@ -8,10 +8,15 @@ function GuessInput({ sendGuess }) {
       className="guess-input-wrapper"
       onSubmit={(event) => {
         event.preventDefault()
-        sendGuess(guess)
+
+        let regexCharacterLimit = new RegExp("^[A-Z]{wordLength}$".replace("wordLength", wordLength))
+        if (regexCharacterLimit.test(guess)) {
+          sendGuess(guess)
+          setGuess("")
+        }
       }}
     >
-      <label for="guess-input">Enter guess:</label>
+      <label htmlFor="guess-input">Enter guess:</label>
       <input
         id="guess-input"
         type="text"
@@ -22,6 +27,7 @@ function GuessInput({ sendGuess }) {
         }}
         minLength={5}
         maxLength={5}
+        disabled={disabled}
       />
     </form>
   )
