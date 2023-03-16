@@ -1,7 +1,7 @@
 import React from "react";
 
-function Banner() {
-  return <div />;
+function Banner({ children }) {
+  return <div className="banner">{children}</div>;
 }
 
 function HappyBanner({ numGuesses }) {
